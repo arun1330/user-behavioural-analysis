@@ -1,0 +1,334 @@
+<!-- <!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Results</title>
+</head>
+<body>
+    <h1>Results</h1>
+    
+    <h2>Feature Importances</h2>
+    <img src="{{ url_for('static', filename=plot_path) }}" alt="Feature Importances" />
+
+    <h2>Dataset Information</h2>
+    <pre>{{ dataset_info }}</pre>
+
+    <h2>First 5 Rows</h2>
+    {{ first_5_rows|safe }}
+
+    <h2>Missing Values</h2>
+    <pre>{{ missing_values }}</pre>
+
+    <h2>Confusion Matrix</h2>
+    <pre>{{ confusion_mat }}</pre>
+
+    <h2>Classification Report</h2>
+    <pre>{{ class_report }}</pre>
+
+    <h2>Accuracy Score</h2>
+    <p>{{ accuracy }}</p>
+</body>
+</html> -->
+
+<!-- <!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Results</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-top: 30px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            max-width: 90%;
+        }
+
+        pre {
+            background: #eee;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Animation class */
+        .fadeIn {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Results</h1>
+        
+        <h2>Feature Importances</h2>
+        <img src="{{ url_for('static', filename=plot_path) }}" alt="Feature Importances" />
+
+        <h2>Dataset Information</h2>
+        <pre>{{ dataset_info }}</pre>
+
+        <h2>First 5 Rows</h2>
+        {{ first_5_rows|safe }}
+
+        <h2>Missing Values</h2>
+        <pre>{{ missing_values }}</pre>
+
+        <h2>Confusion Matrix</h2>
+        <pre>{{ confusion_mat }}</pre>
+
+        <h2>Classification Report</h2>
+        <pre>{{ class_report }}</pre>
+
+        <h2>Accuracy Score</h2>
+        <p>{{ accuracy }}</p>
+    </div>
+
+    <script>
+        // JavaScript for interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            const anchors = document.querySelectorAll('a[href*="#"]');
+            for (let anchor of anchors) {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Animation on scroll
+            const elements = document.querySelectorAll('h2, img, pre, table');
+            function animateOnScroll() {
+                const windowHeight = window.innerHeight;
+                for (let element of elements) {
+                    const elementTop = element.getBoundingClientRect().top;
+                    if (elementTop < windowHeight) {
+                        element.classList.add('fadeIn');
+                    }
+                }
+            }
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Initial check
+        });
+    </script>
+</body>
+</html> -->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Results</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-top: 30px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            max-width: 90%;
+        }
+
+        pre {
+            background: #eee;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fadeIn {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Results</h1>
+        
+        <h2>Feature Importances</h2>
+        <img src="{{ url_for('static', filename=plot_path) }}" alt="Feature Importances" />
+
+        <h2>Dataset Information</h2>
+        <pre>{{ dataset_info }}</pre>
+
+        <h2>First 5 Rows</h2>
+        {{ first_5_rows|safe }}
+
+        <h2>Missing Values</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Missing Values</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for col, count in missing_values.items() %}
+                <tr>
+                    <th>{{ col }}</th>
+                    <td>{{ count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Confusion Matrix</h2>
+        <pre>{{ confusion_mat }}</pre>
+
+        <h2>Classification Report</h2>
+        <pre>{{ class_report }}</pre>
+
+        <h2>Accuracy Score</h2>
+        <p>{{ accuracy }}</p>
+    </div>
+
+    <script>
+        // JavaScript for interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            const anchors = document.querySelectorAll('a[href*="#"]');
+            for (let anchor of anchors) {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Animation on scroll
+            const elements = document.querySelectorAll('h2, img, pre, table');
+            function animateOnScroll() {
+                const windowHeight = window.innerHeight;
+                for (let element of elements) {
+                    const elementTop = element.getBoundingClientRect().top;
+                    if (elementTop < windowHeight) {
+                        element.classList.add('fadeIn');
+                    }
+                }
+            }
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Initial check
+        });
+    </script>
+</body>
+</html>

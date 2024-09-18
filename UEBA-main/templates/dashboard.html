@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #dynamic-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #ff6b6b, #f7d794, #48dbfb, #1dd1a1);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 0%;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #dcdcdc;
+            line-height: 1.6;
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        .button {
+            padding: 12px 25px;
+            border-radius: 25px;
+            border: none;
+            background: linear-gradient(to right, #ff9068, #fd746c);
+            color: #fff;
+            cursor: pointer;
+            margin: 15px 0;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 75, 31, 0.5);
+        }
+
+        .overview {
+            border-top: 2px solid #ffffff;
+            padding-top: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .overview h2 {
+            font-size: 1.8rem;
+            color: #ebc8ca;
+            margin-bottom: 10px;
+        }
+
+        .overview p {
+            font-size: 1rem;
+            color: #9c9c9c;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dynamic-bg"></div>
+    <div class="container">
+        <h1>Welcome, {{ username }}</h1>
+        <div class="overview">
+            <h2>About the Anomaly Detection System</h2>
+            <p>Welcome to the Anomaly Detection System! This platform leverages advanced machine learning models to identify anomalies and potential threats in your data.</p>
+            <p>Our system combines robust algorithms to ensure reliable and actionable insights, helping you stay ahead of potential issues and maintain data integrity.</p>
+        </div>
+        <form action="{{ url_for('results') }}" method="get">
+            <button type="submit" class="button">View Anomalies</button>
+        </form>
+        <form action="{{ url_for('upload') }}" method="get">
+            <button type="submit" class="button">Fraud Detection</button>
+        </form>
+        <form action="{{ url_for('logout') }}" method="get">
+            <button type="submit" class="button">Logout</button>
+        </form>
+    </div>
+</body>
+
+</html>

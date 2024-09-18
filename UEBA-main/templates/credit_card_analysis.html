@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Fraud Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Credit Card Fraud Analysis</h1>
+        <h2>Dataset Overview</h2>
+        <h3>Dataset Information</h3>
+        <pre>{{ info }}</pre>
+        
+        <h3>First 5 Rows</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    {% for col in head.columns %}
+                    <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for index, row in head.iterrows() %}
+                <tr>
+                    {% for col in head.columns %}
+                    <td>{{ row[col] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Missing Values</h3>
+        <ul>
+            {% for col, count in missing_values.items() %}
+            <li>{{ col }}: {{ count }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Model Evaluation</h2>
+        <h3>Confusion Matrix</h3>
+        <pre>{{ confusion_matrix }}</pre>
+
+        <h3>Classification Report</h3>
+        <pre>{{ classification_report }}</pre>
+
+        <h3>Accuracy Score</h3>
+        <p>{{ accuracy }}</p>
+
+        <h2>Feature Importances</h2>
+        <img src="{{ feature_importances }}" alt="Feature Importances">
+
+        <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    </div>
+</body>
+</html>

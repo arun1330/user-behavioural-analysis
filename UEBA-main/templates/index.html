@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Cipher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(120deg, #0f0f0f, #202020);
+            background-size: 200% 200%;
+            animation: gradientAnimation 20s ease infinite;
+            overflow: hidden;
+            color: white;
+        }
+
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+        }
+
+        h1, h2, p {
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+            animation: fadeInUp 2s ease forwards;
+        }
+
+        h1 {
+            font-size: 45px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            color: #00e5ff;
+            animation-delay: 1s;
+        }
+
+        h2 {
+            font-size: 85px;
+            margin-bottom: 25px;
+            color: #ff4081;
+            animation-delay: 0.5s;
+        }
+
+        p {
+            font-size: 1.4em;
+            margin-bottom: 40px;
+            color: #e0e0e0;
+            animation-delay: 1.5s;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            animation-delay: 2s;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            padding: 12px 24px;
+            background: #ff4081;
+            color: #000000;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .buttons a:hover {
+            background-color: #faf8f9;
+            transform: scale(1.1);
+        }
+
+        .notification {
+            margin-top: 20px;
+            padding: 15px;
+            background: #292929;
+            border-left: 5px solid #00e5ff;
+            border-radius: 5px;
+            color: #f0f0f0;
+            font-size: 1.1em;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background" id="particles-js"></div>
+    <div class="container">
+        <h2>Novacipher</h2>
+        <h1>Welcome to Anomaly Detection</h1>
+        <p>Protecting systems from irregularities and threats.</p>
+        <div class="buttons">
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('signup') }}">Sign Up</a>
+        </div>
+        <div class="notification">
+            <strong>Notice:</strong> This page uses advanced detection algorithms to identify and manage anomalies in real-time.
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 100,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#00e5ff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 6
+                    }
+                },
+                "opacity": {
+                    "value": 0.6,
+                    "random": false,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 4,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 30,
+                        "size_min": 1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 120,
+                    "color": "#00e5ff",
+                    "opacity": 0.5,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 3,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 300,
+                        "line_linked": {
+                            "opacity": 0.5
+                        }
+                    },
+                    "bubble": {
+                        "distance": 300,
+                        "size": 50,
+                        "duration": 2,
+                        "opacity": 0.8,
+                        "speed": 2
+                    },
+                    "repulse": {
+                        "distance": 150,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>
+
+
