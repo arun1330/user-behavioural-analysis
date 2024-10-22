@@ -2,103 +2,97 @@
 
 ### **Aims:**
 
-  - To develop a robust notification system that alerts admins to DDoS attacks and 
-other critical network events in real-time based on the user behaviour.
+  - The primary aim of this script is to build an anomaly detection and fraud detection system using machine learning models that can be integrated into a web application (Flask) to automatically detect unusual behaviors or fraudulent activities from employee data. 
 
-  - To minimize the impact of DDoS attacks through timely detection and alerting.
+  - The application allows users to upload datasets and analyze them for anomalies using both Isolation Forest and Autoencoder models. By doing so, it helps in identifying potential security threats or fraud within the organization's operations.
 
 ### **Objectives:**
 
-  The objective of implementing the DDoS attack notification system in an 
-autonomous system based on a user behaviour is to provide real-time alerts to 
-administrators about DDoS attacks and critical network events, enabling timely and 
-effective responses to mitigate potential disruptions and maintain system integrity.
-
-##### **1. Identify Notification Requirements:**
+##### **1. Data Collection and Preprocessing:**
    
-  - Determine the levels of alerts necessary for effective monitoring and response.
-  - Establish preferred channels for delivering notifications to the admins.
+  - Load and process employee data to make it suitable for machine learning models.
+    
+  - Normalize numeric data and encode categorical data to create a consistent and robust input format.
 
-##### **2. Set Up Monitoring Tools:**
+##### **2. Anomaly Detection:**
 
-  - Implement network monitoring tools to capture and analyse network traffic.
-  - Deploy intrusion detection systems (IDS) to detect DDoS attacks and other 
-threats.
+  - Build and train an Isolation Forest model to detect anomalous data points based on behavioral patterns.
+  
+  - Implement an Autoencoder neural network to capture normal patterns and detect reconstruction errors, which could indicate anomalies.
 
-##### **3. Configure Alerting Mechanisms:**
+##### **3. Integration into Flask Web Application:**
 
-  - Leverage built-in alerting features of monitoring tools and cloud services.
-  - Integrate alerting systems with communication platforms like Slack and 
-Microsoft Teams.
-  - Set up SMS notifications for critical alerts using gateway services.
+  - Develop a user interface using Flask where users can upload data and view the anomaly and fraud detection results.
+    
+  - Provide authentication and secure access for users, ensuring that only authorized individuals can access the application.
+  
+  - Save the trained models and preprocessing pipelines to make the system reusable and scalable for new datasets.
 
-##### **4. Testing and Validation:**
+##### **4. Anomaly and Fraudulent Activity Detection:**
  
-  - Simulate DDoS attacks to test the effectiveness of the notification system.
-  - Verify the delivery and formatting of notifications across all chosen channels.
-  - Make adjustments based on test results to ensure reliability.
+  - Combine the results of the Isolation Forest and Autoencoder models to provide an aggregated view of anomalies, with an additional focus on potential fraudulent activities by identifying anomalies that cross certain thresholds.
 
 ##### **5. Ongoing Maintenance:**
 
   - Conduct regular reviews of alert configurations and thresholds.
+  
   - Update the system based on network traffic patterns and new threat intelligence.
-  - Establish a feedback loop with administrators to continually improve the 
-notification system.
+  
+  - Establish a feedback loop with administrators to continually improve the system.
 
-### **Methodology:**
+### **Tools and Techniques Used:**
 
-##### **1. Requirement Analysis:**
- 
-  - Conduct discussions with stakeholders to understand the types of alerts needed.
-  - Decide on notification channels based on stakeholder preferences and technical 
-feasibility.
+##### **1. Flask Web Framework:**
 
-##### **2. Tool Selection and Deployment:**
+- **Flask:** A lightweight web framework is used to build the user interface for this anomaly detection system. Flask allows easy routing, templating (via render_template), and handling of HTTP requests (such as POST for file uploads).
 
-  - Choose appropriate network monitoring tools and IDS.
-  - Implement cloud-based security services for enhanced protection.
+- **Flask SQLAlchemy:** This is used for database management, allowing secure storage of user credentials and session management for logged-in users.
 
-##### **3. Alert Configuration:**
+- **Flask-Werkzeug:** This package handles secure password hashing (generate_password_hash) and secure file uploads (secure_filename).
 
-  - Configure built-in alerting features in tools like Cloudflare.
-  - Integrate with SMS gateway services like Twilio and Nexmo for critical alerts.
+##### **2. Data Preprocessing:**
 
-##### **4. Testing and Validation:**
- 
-  - Use simulation tools to create controlled DDoS attack scenarios.
-  - Monitor the system’s response and ensure notifications are sent and received 
-correctly.
-  - Iterate on configurations based on feedback from testing.
+- **Pandas:** The script uses Pandas to load and manage the dataset, especially for data cleaning and manipulation (e.g., selecting relevant features).
 
-##### **5. Documentation and Training:**
- 
-  - Create detailed documentation for the setup and configuration of monitoring 
-and alerting tools.
-  - Organize training sessions and hands-on workshops for administrators.
+- **Scikit-learn’s ColumnTransformer:** This is used to preprocess the data by applying transformations to both numeric and categorical data.
 
-##### **6. Maintenance and Improvement:**
- 
-  - Regularly review and update alert configurations.
-  - Collect feedback from administrators and make continuous improvements.
+- **StandardScaler:** Normalizes numeric features such as hours_worked and tasks_completed so that they follow a standard distribution.
 
-### **Tools to be used:**
+- **OneHotEncoder:** Encodes categorical features (employee_id, department) into binary formats to allow machine learning algorithms to process them efficiently.
 
-#### **1. Monitoring Tools:**
-   -  **Wireshark:** For capturing and analyzing network traffic.
+- **Train-Test Split:** The train_test_split function from Scikit-learn divides the data into training and testing sets to evaluate model performance.
 
-#### **2. Intrusion Detection Systems (IDS):**
-   -  **Snort:** For real-time network traffic analysis and intrusion detection.
+##### **3. Anomaly Detection Models:**
 
-#### **3. Cloud-Based Security Services:**
-   -  **Cloudflare:** For DDoS protection and web traffic analysis.
+- **Isolation Forest:** The Isolation Forest algorithm is an unsupervised learning technique that isolates anomalies by randomly selecting features and splitting the data. It is particularly useful for detecting outliers that represent fraudulent or suspicious activities.
 
-#### **4. Alerting and Notification Tools:**
-   -  **Slack Webhooks:** For sending real-time alerts to Slack channels.
-   -  **Nexmo:** For SMS gateway services.
+- **Contamination Parameter:** This parameter is set to 0.05, meaning the model assumes 5% of the data could be anomalous.
 
-#### **5. Custom Scripts:**
-   -  **Python:** For scripting custom alerts and notifications.
+- The model is saved using Joblib to allow future use without retraining.
 
-#### 6. Sample website:
-   - To simulate controlled DDoS attack and ensure the working of the system and 
-notifiy the admins in case of an attack.
+- **Autoencoder (Neural Network):** TensorFlow and Keras: These libraries are used to build an Autoencoder model, which learns to compress the input data into a latent space (encoding) and then reconstruct it back (decoding).
+
+- The autoencoder aims to minimize the reconstruction error, and unusually high errors could indicate anomalies in the input data.
+
+- **Model Architecture:** The input layer accepts the preprocessed features.
+
+- The encoding layer compresses the data into a lower-dimensional representation (14 dimensions in this case).
+
+- The decoding layer reconstructs the original input.
+
+- **Loss Function:** Mean Squared Error (MSE) is used as the loss function to minimize the reconstruction difference.
+
+- The model is trained for 50 epochs, and the result is saved in H5 format (autoencoder_model.h5).
+
+##### **4. File Handling and Security:**
+
+- **Secure File Uploads:** The function allowed_file checks if the uploaded file is a CSV format, ensuring secure handling of user inputs.
+
+- **Flask Sessions:** Secure sessions are implemented to handle user authentication, ensuring only authorized users can access the system. Passwords are hashed using PBKDF2-SHA256 for secure storage.
+  
+##### **5. Deployment and Model Management:**
+
+- **Joblib:** Used for saving and loading both the preprocessor and the Isolation Forest model, ensuring that the application can preprocess new datasets and run predictions without re-training the model.
+
+- **TensorFlow Keras:** The autoencoder is saved as an H5 file to be loaded later for prediction.
+
